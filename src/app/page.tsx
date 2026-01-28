@@ -121,7 +121,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Modern Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-neutral-100/70 bg-white/70 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/35 backdrop-blur-xl">
         <div className="max-w-7.1xl mx-auto pl-6 pr-4 md:pl-10 md:pr-6">
           <div className="flex items-center justify-between h-20 gap-6">
             {/* Logo */}
@@ -129,16 +129,13 @@ export default function Home() {
               className="cursor-pointer flex items-center gap-3 group"
               onClick={() => scrollToSection("home")}
             >
-              <Image
+              <img
                 src="/logo/abc-spacery-logo.svg"
                 alt="ABC Spacery"
                 width={180}
                 height={36}
                 className="h-9 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
               />
-              <span className="hidden md:inline-block text-xs tracking-[0.25em] uppercase text-neutral-500">
-                Home Solutions
-              </span>
             </div>
 
             {/* Desktop Navigation */}
@@ -244,12 +241,12 @@ export default function Home() {
             muted
             playsInline
             className="w-full h-full object-cover"
-            style={{ filter: "brightness(0.5)" }}
+            style={{ filter: "brightness(0.6.5)" }}
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
           >
-            <source src="/hero-video.mp4" type="video/mp4" />
+            <source src="/hero-video.webm" type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/40 to-neutral-900/60" />
         </div>
@@ -300,7 +297,7 @@ export default function Home() {
         {/* Minimal Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-white/50 rounded-full scroll-dot-bounce" />
+            <div className="w-1 h-2 bg-white/50 rounded-full animate-bounce" />
           </div>
         </div>
       </section>
@@ -310,10 +307,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div
-              className={`space-y-6 transition-all duration-1000 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-10"
-                }`}
+              className={`space-y-6 transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-10"
+              }`}
             >
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
                 From
@@ -326,10 +324,11 @@ export default function Home() {
             </div>
 
             <div
-              className={`space-y-6 transition-all duration-1000 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
-                }`}
+              className={`space-y-6 transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-10"
+              }`}
               style={{ transitionDelay: "0.3s" }}
             >
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
@@ -407,17 +406,20 @@ export default function Home() {
           <div className="space-y-8">
             <div className="text-center space-y-4">
               <h3 className="text-3xl md:text-4xl font-light text-neutral-900">
-                South India's Largest
+                South India's Largest Experience Center
               </h3>
               <div className="flex justify-center">
                 <Image
                   src="/jaquar/jaquar.png"
                   alt="Jaquar"
-                  width={200}
-                  height={80}
-                  className="h-16 w-auto object-contain"
+                  width={400}
+                  height={120}
+                  className="h-40 w-auto object-contain"
                 />
               </div>
+              <p className="text-center text-lg text-neutral-600">
+                Premium Bath & Home Products Experience
+              </p>
             </div>
             <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
               <Image
@@ -428,9 +430,6 @@ export default function Home() {
                 className="w-full h-auto"
               />
             </div>
-            <p className="text-center text-lg text-neutral-600">
-              Premium Bath & Home Products Experience
-            </p>
           </div>
 
           {/* Prominance */}
@@ -443,11 +442,14 @@ export default function Home() {
                 <Image
                   src="/prominance/prominance-icon.png"
                   alt="Prominance"
-                  width={200}
-                  height={80}
-                  className="h-16 w-auto object-contain"
+                  width={400}
+                  height={120}
+                  className="h-40 w-auto object-contain"
                 />
               </div>
+              <p className="text-center text-lg text-neutral-600">
+                End-to-End Home Interior Design Partner
+              </p>
             </div>
             <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
               <Image
@@ -458,9 +460,6 @@ export default function Home() {
                 className="w-full h-auto"
               />
             </div>
-            <p className="text-center text-lg text-neutral-600">
-              End-to-End Home Interior Design Partner
-            </p>
           </div>
         </div>
       </section>
@@ -510,23 +509,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          <p
-            ref={brandsMoreRef}
-            className="text-center text-lg pt-12 font-light min-h-[28px]"
-          >
-            {/* Single-line rendering (no overlap): static text until typing starts */}
-            <span
-              className={
-                brandsTypingStarted ? "text-neutral-700" : "text-neutral-500"
-              }
-            >
-              {brandsTypingStarted ? typedText : "...and Many More Brands"}
-              {brandsTypingStarted && isTyping && (
-                <span className="animate-pulse ml-0.5 text-neutral-900">|</span>
-              )}
-            </span>
-          </p>
         </div>
       </section>
 
@@ -537,7 +519,9 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-light text-neutral-900">
               <span className="block">Complete Home</span>
 
-              <span className="block font-semibold mt-2 md:mt-4">Solutions</span>
+              <span className="block font-semibold mt-2 md:mt-4">
+                Solutions
+              </span>
             </h2>
           </div>
 
@@ -723,18 +707,24 @@ export default function Home() {
           <div className="py-12 border-b border-neutral-800">
             <div className="flex flex-col md:flex-row md:items-center md:justify-start gap-6 md:gap-10 text-center md:text-left">
               <div className="w-full md:w-auto">
-                <p className="text-lg md:text-xl font-semibold">Patel Marketing</p>
+                <p className="text-lg md:text-xl font-semibold">
+                  Patel Marketing
+                </p>
                 <p className="text-sm text-neutral-500 mt-1">Hyderabad</p>
               </div>
 
-              <div className="hidden md:block h-10 w-px bg-neutral-800/70" aria-hidden="true" />
+              <div
+                className="hidden md:block h-10 w-px bg-neutral-800/70"
+                aria-hidden="true"
+              />
 
               <div className="w-full md:w-auto">
                 <p className="text-lg md:text-xl font-semibold">
                   ABC Group International
                 </p>
                 <p className="text-xs text-neutral-500 mt-2 leading-relaxed md:max-w-md">
-                  India • Qatar • UAE • Oman • Uganda • Rwanda • Kenya • Congo • Tanzania
+                  India • Qatar • UAE • Oman • Uganda • Rwanda • Kenya • Congo •
+                  Tanzania
                 </p>
               </div>
             </div>
