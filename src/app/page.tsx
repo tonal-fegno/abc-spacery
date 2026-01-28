@@ -289,8 +289,8 @@ export default function Home() {
 
         {/* Minimal Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="w-7 h-12 border-2 border-white/60 rounded-full flex items-start justify-center p-2 scroll-mouse bg-white/5">
-            <div className="w-1.5 h-3 bg-white/80 rounded-full" />
+          <div className="w-7 h-12 border-2 border-white/60 rounded-full flex items-start justify-center p-2 bg-white/5">
+            <div className="w-1.5 h-3 bg-white/80 rounded-full animate-mouse-dot" />
           </div>
         </div>
       </section>

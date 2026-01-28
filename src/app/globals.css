@@ -276,20 +276,20 @@ body {
 }
 
 /* Scroll mouse indicator animation */
-@keyframes scroll-mouse {
-  0%,
-  100% {
+@keyframes mouse-dot {
+  0% {
     transform: translateY(0);
-    opacity: 0.7;
   }
   50% {
-    transform: translateY(-10px);
-    opacity: 1;
+    transform: translateY(12px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
-.scroll-mouse {
-  animation: scroll-mouse 1.5s ease-in-out infinite;
+.animate-mouse-dot {
+  animation: mouse-dot 1.5s ease-in-out infinite;
 }
 
 @media (min-width: 640px) {
