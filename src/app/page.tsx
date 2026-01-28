@@ -234,14 +234,13 @@ export default function Home() {
         className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       >
         {/* Video Background with Modern Overlay */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 brightness-[0.7] overflow-hidden">
           <video
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-cover"
-            style={{ filter: "brightness(0.6.5)" }}
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
@@ -254,14 +253,8 @@ export default function Home() {
         {/* Hero Content - Clean & Minimal */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
           <div className="space-y-8 animate-fade-in">
-            <div className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-              <p className="text-xs uppercase tracking-[0.2em] font-medium text-white/90">
-                Welcome to ABC Spacery
-              </p>
-            </div>
-
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white">
-              Design Spaces,
+              Design Spaces
               <br />
               <span className="font-semibold">Inspire Living</span>
             </h1>
@@ -296,8 +289,8 @@ export default function Home() {
 
         {/* Minimal Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-white/50 rounded-full animate-bounce" />
+          <div className="w-7 h-12 border-2 border-white/60 rounded-full flex items-start justify-center p-2 scroll-mouse bg-white/5">
+            <div className="w-1.5 h-3 bg-white/80 rounded-full" />
           </div>
         </div>
       </section>
@@ -307,11 +300,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div
-              className={`space-y-6 transition-all duration-1000 ${
-                isVisible
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 -translate-x-10"
-              }`}
+              className={`space-y-6 transition-all duration-1000 ${isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-10"
+                }`}
             >
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
                 From
@@ -324,11 +316,10 @@ export default function Home() {
             </div>
 
             <div
-              className={`space-y-6 transition-all duration-1000 ${
-                isVisible
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 translate-x-10"
-              }`}
+              className={`space-y-6 transition-all duration-1000 ${isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-10"
+                }`}
               style={{ transitionDelay: "0.3s" }}
             >
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
@@ -348,7 +339,7 @@ export default function Home() {
       <section id="story" className="relative py-32 px-6 bg-neutral-50">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal y={40} duration={0.8}>
-            <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="grid md:grid-cols-2 gap-12 items-center justify-center">
               <div className="space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-neutral-900 rounded-full">
                   <p className="text-xs uppercase tracking-[0.2em] font-medium text-white">
@@ -356,7 +347,7 @@ export default function Home() {
                   </p>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-light leading-tight text-neutral-900">
-                  Three Legacies,
+                  Three Legacies
                   <br />
                   <span className="font-semibold">One Vision</span>
                 </h2>
@@ -401,64 +392,68 @@ export default function Home() {
 
       {/* Experience Centers - Clean Cards */}
       <section id="experience" className="py-32 px-6 bg-white">
-        <div className="max-w-7xl mx-auto space-y-20">
-          {/* Jaquar */}
-          <div className="space-y-8">
-            <div className="text-center space-y-4">
-              <h3 className="text-3xl md:text-4xl font-light text-neutral-900">
-                South India's Largest Experience Center
-              </h3>
-              <div className="flex justify-center">
-                <Image
-                  src="/jaquar/jaquar.png"
-                  alt="Jaquar"
-                  width={400}
-                  height={120}
-                  className="h-40 w-auto object-contain"
-                />
-              </div>
-              <p className="text-center text-lg text-neutral-600">
-                Premium Bath & Home Products Experience
-              </p>
-            </div>
-            <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="/jaquar/jquar-banner.png"
-                alt="Jaquar Experience Center"
-                width={1200}
-                height={400}
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid gap-16 lg:gap-24 lg:grid-cols-2 items-start">
+            {/* Jaquar - Left */}
+            <div className="space-y-8">
+              <div className="text-center lg:text-left">
+                <h3 className="text-3xl md:text-4xl font-light text-neutral-900 mb-2">
+                  South India's Largest Experience Center
+                </h3>
 
-          {/* Prominance */}
-          <div className="space-y-8">
-            <div className="text-center space-y-4">
-              <h3 className="text-3xl md:text-4xl font-light text-neutral-900">
-                Biggest Experience Center for
-              </h3>
-              <div className="flex justify-center">
+                <div className="flex justify-center lg:justify-start">
+                  <img
+                    src="/jaquar/jaquar.png"
+                    alt="Jaquar"
+                    width={400}
+                    height={80}
+                    className="h-30 w-auto object-contain"
+                  />
+                </div>
+
+                <p className="text-lg text-neutral-600">
+                  Premium Bath & Home Products Experience
+                </p>
+              </div>
+              <div className="max-w-4xl lg:max-w-none mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-lg">
                 <Image
-                  src="/prominance/prominance-icon.png"
-                  alt="Prominance"
-                  width={400}
-                  height={120}
-                  className="h-40 w-auto object-contain"
+                  src="/jaquar/jquar-banner.png"
+                  alt="Jaquar Experience Center"
+                  width={1200}
+                  height={400}
+                  className="w-full h-auto"
                 />
               </div>
-              <p className="text-center text-lg text-neutral-600">
-                End-to-End Home Interior Design Partner
-              </p>
             </div>
-            <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="/prominance/banner.png"
-                alt="Prominance Homworks"
-                width={1200}
-                height={400}
-                className="w-full h-auto"
-              />
+
+            {/* Prominance - Right, starting from center of first section */}
+            <div className="space-y-8 lg:mt-32 lg:pl-4">
+              <div className="text-center lg:text-right">
+                <h3 className="text-3xl md:text-4xl font-light text-neutral-900">
+                  Biggest Experience Center for
+                </h3>
+                <div className="flex justify-center lg:justify-end mb-1">
+                  <Image
+                    src="/prominance/prominance-icon.png"
+                    alt="Prominance"
+                    width={400}
+                    height={120}
+                    className="h-40 w-auto object-contain"
+                  />
+                </div>
+                <p className="text-center lg:text-right text-lg text-neutral-600">
+                  End-to-End Home Interior Design Partner
+                </p>
+              </div>
+              <div className="max-w-4xl mx-auto lg:ml-auto lg:mr-0 rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/prominance/banner.png"
+                  alt="Prominance Homworks"
+                  width={1200}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -469,14 +464,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl md:text-5xl font-light text-neutral-900">
-              <span className="block">Curated Brands,</span>
+              <span className="block">Curated Brands</span>
               <span className="block font-semibold mt-2 md:mt-4">
                 One Destination
               </span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             {[
               { name: "RAK CERAMICS", image: "/rak.png" },
               {
@@ -497,14 +492,14 @@ export default function Home() {
             ].map((brand, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl p-8 flex items-center justify-center hover:shadow-lg transition-all duration-300 border border-neutral-100 hover:border-neutral-300 group"
+                className="bg-white rounded-xl p-10 flex items-center justify-center hover:shadow-lg transition-all duration-300 border border-neutral-100 hover:border-neutral-300 group w-1/2 md:w-1/3 lg:w-1/4"
               >
                 <Image
                   src={brand.image}
                   alt={brand.name}
-                  width={160}
-                  height={100}
-                  className="object-contain max-h-20 w-auto "
+                  width={280}
+                  height={180}
+                  className="object-contain max-h-30 w-auto"
                 />
               </div>
             ))}
@@ -513,19 +508,19 @@ export default function Home() {
       </section>
 
       {/* Solutions - Clean Categories */}
-      <section id="solutions" className="py-32 px-6 bg-white">
+      <section id="solutions" className="py-36 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl md:text-5xl font-light text-neutral-900">
               <span className="block">Complete Home</span>
 
-              <span className="block font-semibold mt-2 md:mt-4">
+              <span className="block font-semibold mt-3 md:mt-5">
                 Solutions
               </span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             {[
               "Accessories",
               "Tiles & Slabs",
@@ -540,9 +535,12 @@ export default function Home() {
             ].map((category, index) => (
               <div
                 key={index}
-                className="group bg-neutral-50 hover:bg-neutral-900 rounded-xl p-6 text-center transition-all duration-300 cursor-pointer border border-neutral-100 hover:border-neutral-900"
+                className="group bg-neutral-50 hover:bg-neutral-900 rounded-3xl 
+             p-10 text-center transition-all duration-300 cursor-pointer
+             border border-neutral-100 hover:border-neutral-900
+             shadow-md hover:shadow-xl flex items-center justify-center"
               >
-                <p className="text-sm font-medium text-neutral-900 group-hover:text-white transition-colors">
+                <p className="text-lg md:text-xl font-medium text-neutral-900 group-hover:text-white transition-colors text-center">
                   {category}
                 </p>
               </div>
