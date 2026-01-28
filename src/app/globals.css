@@ -56,6 +56,22 @@ body {
   animation: bounce 2s infinite;
 }
 
+/* Scroll indicator dot animation (subtle vertical move) */
+@keyframes scroll-dot-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+.scroll-dot-bounce {
+  animation: scroll-dot-bounce 1.4s ease-in-out infinite;
+}
+
 @keyframes pulse-slow {
   0%, 100% {
     opacity: 0.1;
