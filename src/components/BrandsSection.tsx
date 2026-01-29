@@ -50,7 +50,7 @@ export default function BrandsSection() {
                     : ""
                 }`}
               >
-                <Image
+                <img
                   src={brand.image}
                   alt={brand.name}
                   width={280}

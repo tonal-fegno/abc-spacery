@@ -22,7 +22,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-neutral-800">
           {/* Brand */}
           <div className="lg:col-span-2 space-y-6">
-            <Image
+            <img
               src="/logo/abc-spacery-logo.svg"
               alt="ABC Spacery"
               width={200}
@@ -30,8 +30,8 @@ export default function Footer({ scrollToSection }: FooterProps) {
               className="h-10 w-auto filter brightness-0 invert"
             />
             <p className="text-neutral-400 leading-relaxed max-w-md">
-              Creating exceptional spaces with innovative design solutions.
-              Your vision, our expertise, delivered with excellence.
+              Creating exceptional spaces with innovative design solutions. Your
+              vision, our expertise, delivered with excellence.
             </p>
             <div className="flex gap-4">
               <a
@@ -155,9 +155,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
 
         {/* Copyright */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
-          <p>
-            © {new Date().getFullYear()} ABC Spacery. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} ABC Spacery. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-white transition-colors">
               Privacy Policy

@@ -29,7 +29,7 @@ export default function ExperienceCenters() {
             </p>
           </div>
           <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-            <Image
+            <img
               src="/jaquar/jquar-banner.png"
               alt="Jaquar Experience Center"
               width={1200}
@@ -48,7 +48,7 @@ export default function ExperienceCenters() {
               <span className="font-semibold">Center for</span>
             </h3>
             <div className="py-4">
-              <Image
+              <img
                 src="/prominance/prominance-icon.png"
                 alt="Prominance"
                 width={300}
@@ -62,7 +62,7 @@ export default function ExperienceCenters() {
             </p>
           </div>
           <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-            <Image
+            <img
               src="/prominance/banner.png"
               alt="Prominance Homworks"
               width={1200}
