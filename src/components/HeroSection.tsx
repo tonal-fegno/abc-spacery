@@ -1,10 +1,15 @@
 "use client";
 
+import { useState } from "react";
+
 interface HeroSectionProps {
   scrollToSection: (id: string) => void;
+  fallbackImage?: string;
 }
 
-export default function HeroSection({ scrollToSection }: HeroSectionProps) {
+export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spacery-image.jpg" }: HeroSectionProps) {
+  const [videoError, setVideoError] = useState(false);
+
   return (
     <section
       id="home"
@@ -12,18 +17,28 @@ export default function HeroSection({ scrollToSection }: HeroSectionProps) {
     >
       {/* Video Background with Modern Overlay */}
       <div className="absolute inset-0 z-0 brightness-[0.8] overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
-        >
-          <source src="/hero-video.webm" type="video/webm" />
-        </video>
+        {!videoError ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+              setVideoError(true);
+            }}
+          >
+            <source src="/hero-video.webm" type="video/webm" />
+          </video>
+        ) : null}
+        {videoError && (
+          <img
+            src={fallbackImage}
+            alt="ABC Spacery"
+            className="w-full h-full object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/40 to-neutral-900/60" />
       </div>
 
