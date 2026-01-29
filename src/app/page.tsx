@@ -234,7 +234,7 @@ export default function Home() {
         className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       >
         {/* Video Background with Modern Overlay */}
-        <div className="absolute inset-0 z-0 brightness-[0.7] overflow-hidden">
+        <div className="absolute inset-0 z-0 brightness-[0.8] overflow-hidden">
           <video
             autoPlay
             loop
@@ -297,13 +297,14 @@ export default function Home() {
 
       {/* Transformation Quote - Clean Design */}
       <section ref={quoteSectionRef} className="py-32 px-6 bg-neutral-900">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div
-              className={`space-y-6 transition-all duration-1000 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-10"
-                }`}
+              className={`space-y-6 transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-10"
+              }`}
             >
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
                 From
@@ -316,10 +317,11 @@ export default function Home() {
             </div>
 
             <div
-              className={`space-y-6 transition-all duration-1000 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
-                }`}
+              className={`space-y-6 transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-10"
+              }`}
               style={{ transitionDelay: "0.3s" }}
             >
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
@@ -337,7 +339,7 @@ export default function Home() {
 
       {/* Our Story - Modern Minimal */}
       <section id="story" className="relative py-32 px-6 bg-neutral-50">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <ScrollReveal y={40} duration={0.8}>
             <div className="grid md:grid-cols-2 gap-12 items-center justify-center">
               <div className="space-y-6">
@@ -390,70 +392,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Centers - Clean Cards */}
+      {/* Experience Centers - Text Left, Image Right */}
       <section id="experience" className="py-32 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid gap-16 lg:gap-24 lg:grid-cols-2 items-start">
-            {/* Jaquar - Left */}
-            <div className="space-y-8">
-              <div className="text-center lg:text-left">
-                <h3 className="text-3xl md:text-4xl font-light text-neutral-900 mb-2">
-                  South India's Largest Experience Center
-                </h3>
-
-                <div className="flex justify-center lg:justify-start">
-                  <img
-                    src="/jaquar/jaquar.png"
-                    alt="Jaquar"
-                    width={400}
-                    height={80}
-                    className="h-30 w-auto object-contain"
-                  />
-                </div>
-
-                <p className="text-lg text-neutral-600">
-                  Premium Bath & Home Products Experience
-                </p>
-              </div>
-              <div className="max-w-4xl lg:max-w-none mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-lg">
-                <Image
-                  src="/jaquar/jquar-banner.png"
-                  alt="Jaquar Experience Center"
-                  width={1200}
-                  height={400}
-                  className="w-full h-auto"
+        <div className="max-w-7xl mx-auto space-y-32">
+          {/* Jaquar - Text Left, Image Right */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <h3 className="text-4xl md:text-5xl font-light text-neutral-900 leading-tight">
+                South India's Largest
+                <br />
+                <span className="font-semibold">Experience Center</span>
+              </h3>
+              <div className="py-4">
+                <img
+                  src="/jaquar/jaquar.png"
+                  alt="Jaquar"
+                  width={280}
+                  height={70}
+                  className="h-20 w-auto object-contain"
                 />
               </div>
+              <p className="text-lg text-neutral-600 leading-relaxed max-w-md">
+                Premium Bath & Home Products Experience featuring world-class
+                sanitaryware, faucets, and bathroom solutions.
+              </p>
             </div>
+            <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
+              <Image
+                src="/jaquar/jquar-banner.png"
+                alt="Jaquar Experience Center"
+                width={1200}
+                height={800}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
 
-            {/* Prominance - Right, starting from center of first section */}
-            <div className="space-y-8 lg:mt-32 lg:pl-4">
-              <div className="text-center lg:text-right">
-                <h3 className="text-3xl md:text-4xl font-light text-neutral-900">
-                  Biggest Experience Center for
-                </h3>
-                <div className="flex justify-center lg:justify-end mb-1">
-                  <Image
-                    src="/prominance/prominance-icon.png"
-                    alt="Prominance"
-                    width={400}
-                    height={120}
-                    className="h-40 w-auto object-contain"
-                  />
-                </div>
-                <p className="text-center lg:text-right text-lg text-neutral-600">
-                  End-to-End Home Interior Design Partner
-                </p>
-              </div>
-              <div className="max-w-4xl mx-auto lg:ml-auto lg:mr-0 rounded-2xl overflow-hidden shadow-lg">
+          {/* Prominance - Text Left, Image Right */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <h3 className="text-4xl md:text-5xl font-light text-neutral-900 leading-tight">
+                Biggest Experience
+                <br />
+                <span className="font-semibold">Center for</span>
+              </h3>
+              <div className="py-4">
                 <Image
-                  src="/prominance/banner.png"
-                  alt="Prominance Homworks"
-                  width={1200}
-                  height={400}
-                  className="w-full h-auto"
+                  src="/prominance/prominance-icon.png"
+                  alt="Prominance"
+                  width={300}
+                  height={100}
+                  className="h-28 w-auto object-contain"
                 />
               </div>
+              <p className="text-lg text-neutral-600 leading-relaxed max-w-md">
+                End-to-End Home Interior Design Partner delivering complete
+                modular solutions for kitchens, wardrobes, and living spaces.
+              </p>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
+              <Image
+                src="/prominance/banner.png"
+                alt="Prominance Homworks"
+                width={1200}
+                height={800}
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
         </div>
@@ -471,38 +475,53 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              { name: "RAK CERAMICS", image: "/rak.png" },
-              {
-                name: "PROMINANCE Homworks®",
-                image: "/prominance-home-work.png",
-              },
-              { name: "ICON WORLD OF TILE", image: "/icon.png" },
-              { name: "Jaquar", image: "/jaquar.png" },
-              { name: "Artize", image: "/Artize.png" },
-              { name: "Jaquar LIGHTING", image: "/jaquar-lighting.png" },
-              { name: "CARYSIL", image: "/carysil.png" },
-              { name: "ÉSSCO", image: "/essco.png" },
-              { name: "norisys®", image: "/norisys.png" },
-              { name: "PROMINANCE Uniframe", image: "/uniframe.png" },
-              { name: "PROMINANCE UPVC", image: "/prominance-upvc.png" },
-              { name: "VICOSTONE", image: "/vicostone.png" },
-              { name: "HOME SCREEN", image: "/home-screen.png" },
-            ].map((brand, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-10 flex items-center justify-center hover:shadow-lg transition-all duration-300 border border-neutral-100 hover:border-neutral-300 group w-1/2 md:w-1/3 lg:w-1/4"
-              >
-                <Image
-                  src={brand.image}
-                  alt={brand.name}
-                  width={280}
-                  height={180}
-                  className="object-contain max-h-30 w-auto"
-                />
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {(() => {
+              const brands = [
+                { name: "RAK CERAMICS", image: "/rak.png" },
+                {
+                  name: "PROMINANCE Homworks®",
+                  image: "/prominance-home-work.png",
+                },
+                { name: "ICON WORLD OF TILE", image: "/icon.png" },
+                { name: "Jaquar", image: "/jaquar.png" },
+                { name: "Artize", image: "/Artize.png" },
+                { name: "Jaquar LIGHTING", image: "/jaquar-lighting.png" },
+                { name: "CARYSIL", image: "/carysil.png" },
+                { name: "ÉSSCO", image: "/essco.png" },
+                { name: "norisys®", image: "/norisys.png" },
+                { name: "PROMINANCE Uniframe", image: "/uniframe.png" },
+                { name: "PROMINANCE UPVC", image: "/prominance-upvc.png" },
+                { name: "VICOSTONE", image: "/vicostone.png" },
+                { name: "HOME SCREEN", image: "/home-screen.png" },
+              ];
+
+              const totalItems = brands.length;
+              const isLastItemAlone = totalItems % 4 === 1;
+
+              return brands.map((brand, index) => {
+                const isLastItem = index === totalItems - 1;
+
+                return (
+                  <div
+                    key={index}
+                    className={`bg-white rounded-xl p-10 flex items-center justify-center hover:shadow-lg transition-all duration-300 border border-neutral-100 hover:border-neutral-300 group ${
+                      isLastItem && isLastItemAlone
+                        ? "xl:col-span-4 xl:w-1/4 xl:mx-auto"
+                        : ""
+                    }`}
+                  >
+                    <Image
+                      src={brand.image}
+                      alt={brand.name}
+                      width={280}
+                      height={180}
+                      className="object-contain max-h-30 w-auto"
+                    />
+                  </div>
+                );
+              });
+            })()}
           </div>
         </div>
       </section>
@@ -522,16 +541,16 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             {[
-              "Accessories",
               "Tiles & Slabs",
-              "Kitchens & Wardrobes",
-              "Sanitaryware",
-              "Sofas & More",
               "Bath Fittings",
+              "Sanitaryware",
+              "Lights & Switches",
+              "Sofas & More",
               "Doors & Windows",
               "Home Cinema",
-              "Lights & Switches",
               "Furniture",
+              "Kitchens & Wardrobes",
+              "Accessories",
             ].map((category, index) => (
               <div
                 key={index}
@@ -549,38 +568,94 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery - Minimal Masonry */}
+      {/* Gallery - Balanced Masonry */}
       <section id="gallery" className="py-32 bg-neutral-50">
-        <div className="mb-16 px-6 ">
+        <div className="mb-16 px-6">
           <h2 className="text-4xl md:text-5xl font-light text-center text-neutral-900">
             <span className="block">Explore Our</span>
             <span className="block font-semibold mt-3">Spaces</span>
           </h2>
         </div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 px-4">
-          {[
-            "/gallerry/gallery-2.png",
-            "/gallerry/gallery-3.png",
-            "/gallerry/gallery-4.png",
-            "/gallerry/gallery-5.png",
-            "/gallerry/gallery-6.png",
-            "/gallerry/gallerry-7.png",
-            "/gallerry/gallery-8.png",
-            "/gallerry/gallery-9.png",
-            "/gallerry/gallery-1.png",
-          ].map((src, index) => (
-            <div
-              key={index}
-              className="mb-4 break-inside-avoid rounded-lg overflow-hidden group cursor-pointer"
-            >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4">
+          {/* Column 1 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
               <img
-                src={src}
-                alt={`Gallery ${index + 1}`}
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                src="/gallerry/gallery-2.png"
+                alt="Gallery 1"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-          ))}
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-6.png"
+                alt="Gallery 5"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Column 2 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-[1.5]">
+              <img
+                src="/gallerry/gallery-3.png"
+                alt="Gallery 2"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallerry-7.png"
+                alt="Gallery 6"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Column 3 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-4.png"
+                alt="Gallery 3"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-[1.3]">
+              <img
+                src="/gallerry/gallery-8.png"
+                alt="Gallery 7"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Column 4 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-5.png"
+                alt="Gallery 4"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-9.png"
+                alt="Gallery 8"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-[0.8]">
+              <img
+                src="/gallerry/gallery-1.png"
+                alt="Gallery 9"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
