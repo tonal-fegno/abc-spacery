@@ -418,7 +418,7 @@ export default function Home() {
               </p>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-              <Image
+              <img
                 src="/jaquar/jquar-banner.png"
                 alt="Jaquar Experience Center"
                 width={1200}
@@ -437,7 +437,7 @@ export default function Home() {
                 <span className="font-semibold">Center for</span>
               </h3>
               <div className="py-4">
-                <Image
+                <img
                   src="/prominance/prominance-icon.png"
                   alt="Prominance"
                   width={300}
@@ -451,7 +451,7 @@ export default function Home() {
               </p>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-              <Image
+              <img
                 src="/prominance/banner.png"
                 alt="Prominance Homworks"
                 width={1200}
@@ -511,7 +511,7 @@ export default function Home() {
                         : ""
                     }`}
                   >
-                    <Image
+                    <img
                       src={brand.image}
                       alt={brand.name}
                       width={280}
@@ -666,7 +666,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-neutral-800">
             {/* Brand */}
             <div className="lg:col-span-2 space-y-6">
-              <Image
+              <img
                 src="/logo/abc-spacery-logo.svg"
                 alt="ABC Spacery"
                 width={200}

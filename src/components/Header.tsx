@@ -31,7 +31,7 @@ export function Header({ onNavigate }: HeaderProps) {
                         className="flex items-center cursor-pointer"
                         onClick={() => onNavigate("home")}
                     >
-                        <Image
+                        <img
                             src="/logo/abc-spacery-logo.svg"
                             alt="ABC Spacery Logo"
                             width={200}
