@@ -109,6 +109,73 @@ body {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* Cursor-follow shimmer for hero title */
+.hero-shimmer-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.hero-shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+
+  /* Gold gradient clipped to text */
+  background: linear-gradient(
+    90deg,
+    rgba(184, 149, 106, 0.15) 0%,
+    rgba(184, 149, 106, 0.95) 50%,
+    rgba(184, 149, 106, 0.15) 100%
+  );
+  background-size: 200% 100%;
+  animation: hero-shimmer-sweep 1.8s linear infinite;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* Mask the overlay so only a small spot shows, controlled by CSS vars */
+  -webkit-mask-image: radial-gradient(
+    circle 85px at var(--shimmer-x, 50%) var(--shimmer-y, 50%),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 22%,
+    rgba(0, 0, 0, 0) 62%
+  );
+  mask-image: radial-gradient(
+    circle 85px at var(--shimmer-x, 50%) var(--shimmer-y, 50%),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 22%,
+    rgba(0, 0, 0, 0) 62%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.hero-shimmer-wrap:hover .hero-shimmer-overlay {
+  opacity: 1;
+}
+
+@keyframes hero-shimmer-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-shimmer-overlay {
+    animation: none !important;
+  }
+  .hero-shimmer-wrap:hover .hero-shimmer-overlay {
+    opacity: 0; /* fall back to plain hover color via Tailwind class */
+  }
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -206,6 +273,23 @@ body {
   margin-bottom: 0.5rem;
   display: inline-block;
   width: 100%;
+}
+
+/* Scroll mouse indicator animation */
+@keyframes mouse-dot {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-mouse-dot {
+  animation: mouse-dot 1.5s ease-in-out infinite;
 }
 
 @media (min-width: 640px) {

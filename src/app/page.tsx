@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import drawing from "../../public/drawing.png";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 interface Particle {
   width: number;
@@ -18,12 +18,13 @@ export default function Home() {
   const [particles, setParticles] = useState<Particle[]>([]);
   const [typedText, setTypedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [brandsTypingStarted, setBrandsTypingStarted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const quoteSectionRef = useRef<HTMLDivElement>(null);
   const brandsMoreRef = useRef<HTMLParagraphElement>(null);
   const hasTypedRef = useRef(false);
 
   useEffect(() => {
-    // Generate particles only on client side to avoid hydration mismatch
     const generateParticles = () => {
       const newParticles: Particle[] = [];
       for (let i = 0; i < 6; i++) {
@@ -77,13 +78,14 @@ export default function Home() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasTypedRef.current) {
             hasTypedRef.current = true;
+            setBrandsTypingStarted(true);
             setIsTyping(true);
 
             const typeText = () => {
               if (currentIndex < text.length) {
                 setTypedText(text.slice(0, currentIndex + 1));
                 currentIndex++;
-                timeoutId = setTimeout(typeText, 100);
+                timeoutId = setTimeout(typeText, 65);
               } else {
                 setIsTyping(false);
               }
@@ -93,7 +95,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.3 },
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
     );
 
     observer.observe(brandsMoreRef.current);
@@ -113,669 +115,451 @@ export default function Home() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+    setMobileMenuOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3]">
-      {/* Header */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm border-b"
-        style={{
-          backgroundColor: "rgba(250, 248, 243, 0.95)",
-          borderColor: "#E8E0D5",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-white">
+      {/* Modern Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/35 backdrop-blur-xl">
+        <div className="max-w-7.1xl mx-auto pl-6 pr-4 md:pl-10 md:pr-6">
+          <div className="flex items-center justify-between h-20 gap-6">
             {/* Logo */}
             <div
-              className="flex items-center cursor-pointer"
+              className="cursor-pointer flex items-center gap-3 group"
               onClick={() => scrollToSection("home")}
             >
-              <div
-                className="rounded-lg px-4 py-2"
-                style={{
-                  background:
-                    "linear-gradient(to bottom right, #8B6F47, #A0826D)",
-                }}
-              >
-                <span className="text-xl md:text-2xl font-bold tracking-tight text-white">
-                  ABC
-                </span>
-              </div>
-              <span
-                className="ml-3 text-xl md:text-2xl font-bold"
-                style={{ color: "#8B6F47" }}
-              >
-                SPACERY
-              </span>
+              <img
+                src="/logo/abc-spacery-logo.svg"
+                alt="ABC Spacery"
+                width={180}
+                height={36}
+                className="h-9 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
+              />
             </div>
 
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-6">
+              <div className="flex items-center gap-1 rounded-full bg-neutral-50/80 border border-neutral-200/70 shadow-sm px-2 py-1">
+                {[
+                  { label: "Home", id: "home" },
+                  { label: "Story", id: "story" },
+                  { label: "Brands", id: "brands" },
+                  { label: "Solutions", id: "solutions" },
+                  { label: "Gallery", id: "gallery" },
+                ].map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollToSection(link.id)}
+                    className="px-4 py-2 text-sm font-medium text-neutral-600 rounded-full hover:text-neutral-900 hover:bg-white transition-all duration-200"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
               <button
-                onClick={() => scrollToSection("home")}
-                className="text-sm font-medium transition-colors"
-                style={{ color: "#4A5568" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#8B6F47")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5568")}
+                onClick={() => scrollToSection("contact")}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-neutral-900/80 text-sm font-medium text-neutral-900 hover:bg-neutral-900 hover:text-white transition-all duration-200 shadow-sm"
               >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection("story")}
-                className="text-sm font-medium transition-colors"
-                style={{ color: "#4A5568" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#8B6F47")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5568")}
-              >
-                Our Story
-              </button>
-              <button
-                onClick={() => scrollToSection("experience")}
-                className="text-sm font-medium transition-colors"
-                style={{ color: "#4A5568" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#8B6F47")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5568")}
-              >
-                Experience Centers
-              </button>
-              <button
-                onClick={() => scrollToSection("brands")}
-                className="text-sm font-medium transition-colors"
-                style={{ color: "#4A5568" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#8B6F47")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5568")}
-              >
-                Brands
-              </button>
-              <button
-                onClick={() => scrollToSection("solutions")}
-                className="text-sm font-medium transition-colors"
-                style={{ color: "#4A5568" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#8B6F47")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5568")}
-              >
-                Solutions
+                <span>Contact</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </button>
             </nav>
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden" style={{ color: "#4A5568" }}>
+            <button
+              className="lg:hidden inline-flex items-center justify-center p-2.5 rounded-full border border-neutral-200 bg-white/80 shadow-sm text-neutral-900"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation"
+            >
               <svg
-                className="w-6 h-6"
+                className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                {mobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
               </svg>
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-neutral-100/80 bg-white/95 backdrop-blur-xl shadow-lg">
+            <nav className="px-6 py-5 space-y-3">
+              {[
+                { label: "Home", id: "home" },
+                { label: "Story", id: "story" },
+                { label: "Brands", id: "brands" },
+                { label: "Solutions", id: "solutions" },
+                { label: "Gallery", id: "gallery" },
+              ].map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className="block w-full text-left text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-50 rounded-full px-4 py-2 transition-colors"
+                >
+                  {link.label}
+                </button>
+              ))}
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="mt-2 block w-full text-center text-sm font-semibold text-white bg-neutral-900 rounded-full px-4 py-2.5 hover:bg-neutral-800 transition-colors"
+              >
+                Contact
+              </button>
+            </nav>
+          </div>
+        )}
       </header>
 
-      {/* Video Banner Hero Section */}
+      {/* Hero Section - Minimal & Modern */}
       <section
         id="home"
         className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       >
-        {/* Video Background */}
-        <div className="absolute inset-0 z-0">
+        {/* Video Background with Modern Overlay */}
+        <div className="absolute inset-0 z-0 brightness-[0.8] overflow-hidden">
           <video
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-cover"
-            style={{ filter: "brightness(0.7)" }}
             onError={(e) => {
-              // Hide video if it fails to load
               e.currentTarget.style.display = "none";
             }}
           >
-            <source src="/hero-video.mp4" type="video/mp4" />
+            <source src="/hero-video.webm" type="video/webm" />
           </video>
-          {/* Fallback gradient overlay - always visible */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 73, 94, 0.9), rgba(139, 111, 71, 0.3))",
-            }}
-          />
-          {/* Decorative pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-          {/* Floating Particles - Hero */}
-          {particles.length > 0 && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
-              {particles.map((particle, i) => (
-                <div
-                  key={i}
-                  className="absolute rounded-full animate-float"
-                  style={{
-                    width: `${particle.width}px`,
-                    height: `${particle.height}px`,
-                    backgroundColor: "#B8956A",
-                    opacity: 0.4,
-                    left: `${particle.left}%`,
-                    top: `${particle.top}%`,
-                    animationDelay: `${particle.animationDelay}s`,
-                    animationDuration: `${particle.animationDuration}s`,
-                  }}
-                />
-              ))}
-            </div>
-          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/40 to-neutral-900/60" />
         </div>
 
-        {/* Content Overlay */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 py-32 text-center">
+        {/* Hero Content - Clean & Minimal */}
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
           <div className="space-y-8 animate-fade-in">
-            <p className="text-lg md:text-xl uppercase tracking-[0.3em] font-light text-white/90">
-              Welcome to
-            </p>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white mb-6">
-              ABC SPACERY
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white">
+              Design Spaces
+              <br />
+              <span className="font-semibold">Inspire Living</span>
             </h1>
-            <p className="text-2xl md:text-4xl font-light italic text-white/95 mb-4">
-              DESIGN SPACES, INSPIRE LIVING
-            </p>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto text-white/90 font-light leading-relaxed">
-              Hyderabad's newest destination for thoughtfully curated complete
-              home solutions
-            </p>
-            <div className="pt-8">
-              <div className="inline-block px-12 py-6 rounded-xl shadow-2xl border-2 border-white/20 backdrop-blur-sm bg-white/10">
-                <p className="text-4xl md:text-5xl font-bold text-white">
-                  75,000 sq.ft.
-                </p>
-                <p className="text-lg md:text-xl mt-2 text-white/90 font-light">
-                  Pure Inspiration
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-          <svg
-            className="w-6 h-6 text-white/70"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </div>
-      </section>
-
-      {/* Quote Section - Italian Marbles to Complete Home Solutions */}
-      <section
-        ref={quoteSectionRef}
-        className="py-24 md:py-32 px-4 relative overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(135deg, #2C3E50 0%, #34495E 50%, #2C3E50 100%)",
-        }}
-      >
-        {/* Animated Decorative Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl animate-pulse-slow"
-            style={{
-              backgroundColor: "#B8956A",
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-          <div
-            className="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl animate-pulse-slow"
-            style={{
-              backgroundColor: "#8B6F47",
-              transform: "translate(50%, 50%)",
-              animationDelay: "1s",
-            }}
-          />
-        </div>
-
-        {/* Floating Particles - Quote Section */}
-        {particles.length > 0 && (
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {particles.map((particle, i) => (
-              <div
-                key={i}
-                className="absolute rounded-full animate-float"
-                style={{
-                  width: `${particle.width}px`,
-                  height: `${particle.height}px`,
-                  backgroundColor: "#B8956A",
-                  opacity: 0.4,
-                  left: `${particle.left}%`,
-                  top: `${particle.top}%`,
-                  animationDelay: `${particle.animationDelay}s`,
-                  animationDuration: `${particle.animationDuration}s`,
-                }}
-              />
-            ))}
-          </div>
-        )}
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-12 text-center">
-            {/* Once the land of */}
-            <div
-              className={`flex flex-col items-center transition-all duration-1000 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-10"
-                }`}
-              style={{ transitionDelay: "0.2s" }}
-            >
-              <p
-                className="text-lg md:text-xl font-light mb-2 transition-all duration-300 hover:scale-110 cursor-default"
-                style={{ color: "#CBD5E0" }}
-              >
-                Once the land of
-              </p>
-              <h2
-                className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight transition-all duration-300 hover:scale-110 hover:brightness-110 cursor-pointer group"
-                style={{
-                  color: "#B8956A",
-                  textShadow: "0 4px 20px rgba(184, 149, 106, 0.3)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.textShadow =
-                    "0 8px 30px rgba(184, 149, 106, 0.6)";
-                  e.currentTarget.style.transform = "scale(1.02)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.textShadow =
-                    "0 4px 20px rgba(184, 149, 106, 0.3)";
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              >
-                Italian Marbles
-              </h2>
-            </div>
-
-            {/* Animated Separator */}
-            <div
-              className={`flex flex-col items-center gap-2 my-4 md:my-0 transition-all duration-1000 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-0"
-                }`}
-              style={{ transitionDelay: "0.5s" }}
-            >
-              <div
-                className="w-px h-16 md:h-20 transition-all duration-500 hover:h-24 md:hover:h-28"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, transparent, #B8956A, transparent)",
-                }}
-              />
-              <div
-                className="w-2 h-2 rounded-full animate-pulse-glow cursor-pointer transition-all duration-300 hover:scale-150 hover:shadow-lg"
-                style={{
-                  backgroundColor: "#B8956A",
-                  boxShadow: "0 0 10px rgba(184, 149, 106, 0.5)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "0 0 20px rgba(184, 149, 106, 0.8)";
-                  e.currentTarget.style.transform = "scale(1.5)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "0 0 10px rgba(184, 149, 106, 0.5)";
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              />
-            </div>
-
-            {/* Now the destination for */}
-            <div
-              className={`flex flex-col items-center transition-all duration-1000 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
-                }`}
-              style={{ transitionDelay: "0.8s" }}
-            >
-              <p
-                className="text-lg md:text-xl font-light mb-2 transition-all duration-300 hover:scale-110 cursor-default"
-                style={{ color: "#CBD5E0" }}
-              >
-                Now the destination for
-              </p>
-              <h2
-                className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight transition-all duration-300 hover:scale-110 hover:brightness-110 cursor-pointer"
-                style={{
-                  color: "#B8956A",
-                  textShadow: "0 4px 20px rgba(184, 149, 106, 0.3)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.textShadow =
-                    "0 8px 30px rgba(184, 149, 106, 0.6)";
-                  e.currentTarget.style.transform = "scale(1.02)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.textShadow =
-                    "0 4px 20px rgba(184, 149, 106, 0.3)";
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              >
-                Complete Home Solutions
-              </h2>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Story - ABC Spacery */}
-      <section
-        id="story"
-        className="relative w-full px-4 overflow-hidden"
-        style={{
-          backgroundColor: "#FAF8F3",
-          backgroundImage: "url('/drawing.png')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain", // ✅ NO CROPPING
-          backgroundPosition: "center top", // ✅ keeps logo visible
-        }}
-      >
-        {/* ✅ Space for full illustration height */}
-        <div className="h-[70vh] sm:h-[75vh] md:h-[80vh] lg:h-[85vh]" />
-
-        {/* Subtle overlay (keeps drawing readable) */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(250,248,243,0.15), rgba(250,248,243,0.6) 70%)",
-          }}
-        />
-
-        {/* Content */}
-        <div className="relative max-w-6xl mx-auto flex justify-start pb-24 md:pb-32">
-          <div className="w-full md:w-[60%] backdrop-blur-sm bg-white/85 border border-white/30 rounded-3xl px-6 md:px-10 py-8 md:py-12 shadow-2xl space-y-6">
-            <p
-              className="text-sm md:text-base uppercase tracking-[0.25em] font-semibold"
-              style={{ color: "#8B6F47" }}
-            >
-              Our Story
+            <p className="text-xl md:text-2xl text-white/80 font-light max-w-2xl mx-auto leading-relaxed">
+              Hyderabad's premier destination for complete home solutions
             </p>
 
-            <h2
-              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-              style={{ color: "#8B6F47" }}
-            >
-              ABC Spacery: Three Legacies, One Vision
-            </h2>
-
-            <div className="space-y-4 text-left">
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: "#4A5568" }}
+            <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => scrollToSection("brands")}
+                className="px-8 py-4 bg-white text-neutral-900 rounded-full font-medium hover:bg-neutral-100 transition-all duration-300 shadow-xl hover:shadow-2xl"
               >
-                <span className="font-semibold" style={{ color: "#8B6F47" }}>
-                  ABC Spacery
-                </span>{" "}
-                is a premium home solutions brand formed by three trusted teams{" "}
-                <span className="font-semibold" style={{ color: "#8B6F47" }}>
-                  ABC Group
-                </span>
-                ,{" "}
-                <span className="font-semibold" style={{ color: "#8B6F47" }}>
-                  Patel Marketing Group
-                </span>
-                , and{" "}
-                <span className="font-semibold" style={{ color: "#8B6F47" }}>
-                  Subha Gruha Group
-                </span>
-                .
-              </p>
-
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: "#4A5568" }}
+                Explore Brands
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="px-8 py-4 bg-transparent text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-neutral-900 transition-all duration-300"
               >
-                We offer complete home solutions under one roof, including
-                tiles, sanitaryware, kitchens, furniture, and smart home
-                technology.
-              </p>
-
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: "#4A5568" }}
-              >
-                With the global strength of{" "}
-                <span className="font-semibold" style={{ color: "#8B6F47" }}>
-                  ABC Group
-                </span>
-                , the customer-friendly approach of{" "}
-                <span className="font-semibold" style={{ color: "#8B6F47" }}>
-                  Patel Marketing Group
-                </span>
-                , and the reliable real estate experience of{" "}
-                <span className="font-semibold" style={{ color: "#8B6F47" }}>
-                  Subha Gruha Group
-                </span>
-                , ABC Spacery is committed to future-ready living spaces.
-              </p>
-
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: "#4A5568" }}
-              >
-                Together, the three teams deliver better homes and better
-                living.
-              </p>
+                Get in Touch
+              </button>
             </div>
+
+            <div className="pt-12">
+              <p className="text-5xl md:text-6xl font-light text-white mb-2">
+                75,000 sq.ft
+              </p>
+              <p className="text-lg text-white/70">of Pure Inspiration</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Minimal Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="w-7 h-12 border-2 border-white/60 rounded-full flex items-start justify-center p-2 bg-white/5">
+            <div className="w-1.5 h-3 bg-white/80 rounded-full animate-mouse-dot" />
           </div>
         </div>
       </section>
 
-      {/* Experience Centers */}
-      <section
-        id="experience"
-        className="py-20 md:py-32 px-4"
-        style={{ backgroundColor: "#FAF8F3" }}
-      >
-        <div className="max-w-7xl mx-auto space-y-24">
-          {/* Jaquar World */}
-          <div className="text-center space-y-10">
-            <h2
-              className="text-4xl md:text-6xl font-bold mb-8"
-              style={{ color: "#8B6F47" }}
-            >
-              South India's Largest Experience Center
-            </h2>
-            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl px-10 py-16 max-w-3xl mx-auto shadow-2xl transform transition-transform hover:scale-105">
-              <p className="text-5xl md:text-6xl font-bold mb-4">Jaquar</p>
-              <p className="text-3xl md:text-4xl font-light mb-6">WORLD</p>
-              <p className="text-lg md:text-xl text-blue-100">
-                Explore Premium Bath & Home Products
-              </p>
-            </div>
-          </div>
-
-          {/* Prominance Homworks */}
-          <div className="text-center space-y-10">
-            <h2
-              className="text-4xl md:text-6xl font-bold mb-8"
-              style={{ color: "#8B6F47" }}
-            >
-              Biggest Experience Center for
-            </h2>
-            <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-2xl px-10 py-16 max-w-3xl mx-auto shadow-2xl transform transition-transform hover:scale-105">
-              <p className="text-5xl md:text-6xl font-bold mb-4">PROMINANCE</p>
-              <p className="text-3xl md:text-4xl font-light mb-6">Homworks®</p>
-              <p className="text-lg md:text-xl text-purple-100">
-                End to End Home Interior Designer Partner
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Curated Brands */}
-      <section
-        id="brands"
-        className="py-20 md:py-32 px-4"
-        style={{ backgroundColor: "#F5F1E8" }}
-      >
+      {/* Transformation Quote - Clean Design */}
+      <section ref={quoteSectionRef} className="py-32 px-6 bg-neutral-900">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-6 mb-16">
-            {/* <p
-              className="text-sm md:text-base uppercase tracking-wider"
-              style={{ color: "#4A5568" }}
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div
+              className={`space-y-6 transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-10"
+              }`}
             >
-              ABC SPACERY
-            </p> */}
-            {/* <p
-              className="text-lg md:text-xl italic mb-4"
-              style={{ color: "#4A5568" }}
-            >
-              DESIGN SPACES, INSPIRE LIVING
-            </p> */}
-            <h2
-              className="text-4xl md:text-6xl font-bold"
-              style={{ color: "#8B6F47" }}
-            >
-              Curated Brands One Destination+
-            </h2>
-          </div>
+              <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
+                From
+              </p>
+              <h2 className="text-5xl md:text-6xl font-light text-white leading-tight">
+                Italian
+                <br />
+                <span className="font-semibold">Marbles</span>
+              </h2>
+            </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
-            {[
-              { name: "RAK CERAMICS", image: "/rak.png" },
-              {
-                name: "PROMINANCE Homworks®",
-                image: "/prominance-home-work.png",
-              },
-              { name: "ICON WORLD OF TILE", image: "/icon.png" },
-              { name: "Jaquar", image: "/jaquar.png" },
-              { name: "Artize", image: "/Artize.png" },
-              { name: "Jaquar LIGHTING", image: "/jaquar-lighting.png" },
-              { name: "CARYSIL", image: "/carysil.png" },
-              { name: "ÉSSCO", image: "/essco.png" },
-              { name: "norisys®", image: "/norisys.png" },
-              {
-                name: "PROMINANCE Uniframe",
-                image: "/uniframe.png",
-                subtitle: "ALUMINIUM WINDOW SYSTEMS",
-              },
-              {
-                name: "PROMINANCE UPVC",
-                image: "/prominance-upvc.png",
-                subtitle: "WINDOW SYSTEMS",
-              },
-              {
-                name: "VICOSTONE",
-                image: "/vicostone.png",
-                subtitle: "The Art of Quartz",
-              },
-              { name: "HOME SCREEN", image: "/home-screen.png" },
-            ].map((brand, index) => (
-              <div
-                key={index}
-                className="group rounded-2xl border border-[#E8E0D5]/80 bg-[#FAF8F3]/80 px-4 md:px-6 py-6 md:py-8 flex items-center justify-center transition-all duration-300 hover:border-[#8B6F47] hover:bg-white hover:shadow-md"
-                style={{ minHeight: "150px" }}
-              >
-                <div className="relative w-full h-24 md:h-32 flex items-center justify-center">
-                  <Image
-                    src={brand.image}
-                    alt={brand.name}
-                    width={200}
-                    height={140}
-                    className="object-contain max-h-full w-auto transition-transform duration-300 group-hover:scale-105"
-                  />
+            <div
+              className={`space-y-6 transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-10"
+              }`}
+              style={{ transitionDelay: "0.3s" }}
+            >
+              <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 font-medium">
+                To
+              </p>
+              <h2 className="text-5xl md:text-6xl font-light text-white leading-tight">
+                Complete Home
+                <br />
+                <span className="font-semibold">Solutions</span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story - Modern Minimal */}
+      <section id="story" className="relative py-32 px-6 bg-neutral-50">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal y={40} duration={0.8}>
+            <div className="grid md:grid-cols-2 gap-12 items-center justify-center">
+              <div className="space-y-6">
+                <div className="inline-block px-4 py-1.5 bg-neutral-900 rounded-full">
+                  <p className="text-xs uppercase tracking-[0.2em] font-medium text-white">
+                    Our Story
+                  </p>
                 </div>
+                <h2 className="text-4xl md:text-5xl font-light leading-tight text-neutral-900">
+                  Three Legacies
+                  <br />
+                  <span className="font-semibold">One Vision</span>
+                </h2>
               </div>
-            ))}
-          </div>
 
-          <p
-            ref={brandsMoreRef}
-            className="text-lg md:text-xl text-center pt-12 font-medium"
-            style={{ color: "#4A5568", minHeight: "2rem" }}
-          >
-            {typedText || "\u00A0"}
-            {isTyping && (
-              <span className="animate-pulse ml-1" style={{ color: "#8B6F47" }}>
-                |
-              </span>
-            )}
-          </p>
+              <div className="space-y-6 text-neutral-600 leading-relaxed">
+                <p>
+                  <span className="font-semibold text-neutral-900">
+                    ABC Spacery
+                  </span>{" "}
+                  brings together three trusted teams—
+                  <span className="font-semibold text-neutral-900">
+                    ABC Group
+                  </span>
+                  ,{" "}
+                  <span className="font-semibold text-neutral-900">
+                    Patel Marketing Group
+                  </span>
+                  , and{" "}
+                  <span className="font-semibold text-neutral-900">
+                    Subha Gruha Group
+                  </span>
+                  —to create a premium home solutions brand.
+                </p>
+
+                <p>
+                  We offer complete home solutions under one roof, including
+                  tiles, sanitaryware, kitchens, furniture, and smart home
+                  technology.
+                </p>
+
+                <p>
+                  With global expertise, customer-centric service, and proven
+                  real estate experience, we deliver future-ready living spaces
+                  that inspire better homes and better living.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Product Categories */}
-      <section
-        id="solutions"
-        className="py-20 md:py-32 px-4"
-        style={{ backgroundColor: "#FAF8F3" }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-6 mb-16">
-            <h2
-              className="text-4xl md:text-6xl font-bold"
-              style={{ color: "#8B6F47" }}
-            >
-              Complete Home Solutions
-            </h2>
-            <p
-              className="text-xl md:text-2xl italic"
-              style={{ color: "#4A5568" }}
-            >
-              DESIGN SPACES, INSPIRE LIVING
-            </p>
+      {/* Experience Centers - Text Left, Image Right */}
+      <section id="experience" className="py-32 px-6 bg-white">
+        <div className="max-w-7xl mx-auto space-y-32">
+          {/* Jaquar - Text Left, Image Right */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <h3 className="text-4xl md:text-5xl font-light text-neutral-900 leading-tight">
+                South India's Largest
+                <br />
+                <span className="font-semibold">Experience Center</span>
+              </h3>
+              <div className="py-4">
+                <img
+                  src="/jaquar/jaquar.png"
+                  alt="Jaquar"
+                  width={280}
+                  height={70}
+                  className="h-20 w-auto object-contain"
+                />
+              </div>
+              <p className="text-lg text-neutral-600 leading-relaxed max-w-md">
+                Premium Bath & Home Products Experience featuring world-class
+                sanitaryware, faucets, and bathroom solutions.
+              </p>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
+              <Image
+                src="/jaquar/jquar-banner.png"
+                alt="Jaquar Experience Center"
+                width={1200}
+                height={800}
+                className="w-full h-auto object-cover"
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+          {/* Prominance - Text Left, Image Right */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <h3 className="text-4xl md:text-5xl font-light text-neutral-900 leading-tight">
+                Biggest Experience
+                <br />
+                <span className="font-semibold">Center for</span>
+              </h3>
+              <div className="py-4">
+                <Image
+                  src="/prominance/prominance-icon.png"
+                  alt="Prominance"
+                  width={300}
+                  height={100}
+                  className="h-28 w-auto object-contain"
+                />
+              </div>
+              <p className="text-lg text-neutral-600 leading-relaxed max-w-md">
+                End-to-End Home Interior Design Partner delivering complete
+                modular solutions for kitchens, wardrobes, and living spaces.
+              </p>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
+              <Image
+                src="/prominance/banner.png"
+                alt="Prominance Homworks"
+                width={1200}
+                height={800}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Brands - Minimal Grid */}
+      <section id="brands" className="py-32 px-6 bg-neutral-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-4xl md:text-5xl font-light text-neutral-900">
+              <span className="block">Curated Brands</span>
+              <span className="block font-semibold mt-2 md:mt-4">
+                One Destination
+              </span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {(() => {
+              const brands = [
+                { name: "RAK CERAMICS", image: "/rak.png" },
+                {
+                  name: "PROMINANCE Homworks®",
+                  image: "/prominance-home-work.png",
+                },
+                { name: "ICON WORLD OF TILE", image: "/icon.png" },
+                { name: "Jaquar", image: "/jaquar.png" },
+                { name: "Artize", image: "/Artize.png" },
+                { name: "Jaquar LIGHTING", image: "/jaquar-lighting.png" },
+                { name: "CARYSIL", image: "/carysil.png" },
+                { name: "ÉSSCO", image: "/essco.png" },
+                { name: "norisys®", image: "/norisys.png" },
+                { name: "PROMINANCE Uniframe", image: "/uniframe.png" },
+                { name: "PROMINANCE UPVC", image: "/prominance-upvc.png" },
+                { name: "VICOSTONE", image: "/vicostone.png" },
+                { name: "HOME SCREEN", image: "/home-screen.png" },
+              ];
+
+              const totalItems = brands.length;
+              const isLastItemAlone = totalItems % 4 === 1;
+
+              return brands.map((brand, index) => {
+                const isLastItem = index === totalItems - 1;
+
+                return (
+                  <div
+                    key={index}
+                    className={`bg-white rounded-xl p-10 flex items-center justify-center hover:shadow-lg transition-all duration-300 border border-neutral-100 hover:border-neutral-300 group ${
+                      isLastItem && isLastItemAlone
+                        ? "xl:col-span-4 xl:w-1/4 xl:mx-auto"
+                        : ""
+                    }`}
+                  >
+                    <Image
+                      src={brand.image}
+                      alt={brand.name}
+                      width={280}
+                      height={180}
+                      className="object-contain max-h-30 w-auto"
+                    />
+                  </div>
+                );
+              });
+            })()}
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions - Clean Categories */}
+      <section id="solutions" className="py-36 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-4xl md:text-5xl font-light text-neutral-900">
+              <span className="block">Complete Home</span>
+
+              <span className="block font-semibold mt-3 md:mt-5">
+                Solutions
+              </span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             {[
-              "Accessories",
               "Tiles & Slabs",
-              "Kitchens & Wardrobes",
-              "Sanitaryware",
-              "Sofas & More",
               "Bath Fittings",
+              "Sanitaryware",
+              "Lights & Switches",
+              "Sofas & More",
               "Doors & Windows",
               "Home Cinema",
-              "Lights & Switches",
               "Furniture",
+              "Kitchens & Wardrobes",
+              "Accessories",
             ].map((category, index) => (
               <div
                 key={index}
-                className="rounded-xl p-6 md:p-8 hover:shadow-xl transition-all border-2 transform hover:scale-105 cursor-pointer"
-                style={{ backgroundColor: "#F5F1E8", borderColor: "#E8E0D5" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#F0EBE0";
-                  e.currentTarget.style.borderColor = "#8B6F47";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#F5F1E8";
-                  e.currentTarget.style.borderColor = "#E8E0D5";
-                }}
+                className="group bg-neutral-50 hover:bg-neutral-900 rounded-3xl 
+             p-10 text-center transition-all duration-300 cursor-pointer
+             border border-neutral-100 hover:border-neutral-900
+             shadow-md hover:shadow-xl flex items-center justify-center"
               >
-                <p
-                  className="text-sm md:text-base font-medium text-center"
-                  style={{ color: "#4A5568" }}
-                >
+                <p className="text-lg md:text-xl font-medium text-neutral-900 group-hover:text-white transition-colors text-center">
                   {category}
                 </p>
               </div>
@@ -784,114 +568,253 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery Section - Masonry Layout */}
-      <section
-        id="gallery"
-        className="py-20 md:py-32 overflow-hidden"
-        style={{ backgroundColor: "#FAF8F3" }}
-      >
-        <div className="mb-12 px-4">
-          <h2
-            className="text-4xl md:text-6xl font-bold text-center"
-            style={{ color: "#8B6F47" }}
-          >
-            Explore Our Spaces
+      {/* Gallery - Balanced Masonry */}
+      <section id="gallery" className="py-32 bg-neutral-50">
+        <div className="mb-16 px-6">
+          <h2 className="text-4xl md:text-5xl font-light text-center text-neutral-900">
+            <span className="block">Explore Our</span>
+            <span className="block font-semibold mt-3">Spaces</span>
           </h2>
         </div>
 
-        <div className="w-full">
-          {/* Masonry layout using CSS columns - fills viewport */}
-          <div
-            className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-2 md:gap-4 px-2 md:px-4"
-            style={{ columnFill: "balance" }}
-          >
-            {[
-              { src: "/gallerry/gallery-1.png", height: "h-[35vh]" },
-              { src: "/gallerry/gallery-2.png", height: "h-[45vh]" },
-              { src: "/gallerry/gallery-3.png", height: "h-[40vh]" },
-              { src: "/gallerry/gallery-4.png", height: "h-[42vh]" },
-              { src: "/gallerry/gallery-5.png", height: "h-[38vh]" },
-              { src: "/gallerry/gallery-6.png", height: "h-[44vh]" },
-              { src: "/gallerry/gallerry-7.png", height: "h-[41vh]" },
-              { src: "/gallerry/gallery-8.png", height: "h-[43vh]" },
-              { src: "/gallerry/gallery-9.png", height: "h-[39vh]" },
-            ].map((item, index) => (
-              <div
-                key={`gallery-${index}`}
-                className={`mb-2 md:mb-4 break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl ${item.height} w-full`}
-              >
-                <img
-                  src={item.src}
-                  alt={`Gallery ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4">
+          {/* Column 1 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-2.png"
+                alt="Gallery 1"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-6.png"
+                alt="Gallery 5"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Column 2 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-[1.5]">
+              <img
+                src="/gallerry/gallery-3.png"
+                alt="Gallery 2"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallerry-7.png"
+                alt="Gallery 6"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Column 3 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-4.png"
+                alt="Gallery 3"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-[1.3]">
+              <img
+                src="/gallerry/gallery-8.png"
+                alt="Gallery 7"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          {/* Column 4 */}
+          <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-5.png"
+                alt="Gallery 4"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+              <img
+                src="/gallerry/gallery-9.png"
+                alt="Gallery 8"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="rounded-lg overflow-hidden group cursor-pointer flex-[0.8]">
+              <img
+                src="/gallerry/gallery-1.png"
+                alt="Gallery 9"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer
-        className="py-16 md:py-20 px-4 relative overflow-hidden"
-        style={{ backgroundColor: "#2C3E50" }}
-      >
-        {/* Floating Particles - Footer */}
-        {particles.length > 0 && (
-          <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-            {particles.map((particle, i) => (
-              <div
-                key={i}
-                className="absolute rounded-full animate-float"
-                style={{
-                  width: `${particle.width}px`,
-                  height: `${particle.height}px`,
-                  backgroundColor: "#B8956A",
-                  opacity: 0.4,
-                  left: `${particle.left}%`,
-                  top: `${particle.top}%`,
-                  animationDelay: `${particle.animationDelay}s`,
-                  animationDuration: `${particle.animationDuration}s`,
-                }}
+      {/* Footer - Minimal & Modern */}
+      <footer id="contact" className="bg-neutral-900 text-white py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Main Footer Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-neutral-800">
+            {/* Brand */}
+            <div className="lg:col-span-2 space-y-6">
+              <Image
+                src="/logo/abc-spacery-logo.svg"
+                alt="ABC Spacery"
+                width={200}
+                height={40}
+                className="h-10 w-auto filter brightness-0 invert"
               />
-            ))}
-          </div>
-        )}
+              <p className="text-neutral-400 leading-relaxed max-w-md">
+                Creating exceptional spaces with innovative design solutions.
+                Your vision, our expertise, delivered with excellence.
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href="https://www.facebook.com/abcspacery/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
+                >
+                  <svg
+                    className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 transition-colors"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/abcspacery?igsh=MXVnd3U1eDk3enV5eQ=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
+                >
+                  <svg
+                    className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 transition-colors"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/abc-spacery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
+                >
+                  <svg
+                    className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 transition-colors"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
 
-        <div className="max-w-6xl mx-auto text-center space-y-10 relative z-10">
-          <div className="space-y-4">
-            <h3 className="text-3xl md:text-5xl font-bold text-white">
-              ABC SPACERY
-            </h3>
-            <p
-              className="text-xl md:text-2xl italic"
-              style={{ color: "#CBD5E0" }}
-            >
-              DESIGN SPACES, INSPIRE LIVING
-            </p>
+            {/* Quick Links */}
+            <div className="space-y-6">
+              <h4 className="text-sm font-semibold uppercase tracking-wider">
+                Quick Links
+              </h4>
+              <nav className="space-y-3">
+                {[
+                  { label: "Home", id: "home" },
+                  { label: "Our Story", id: "story" },
+                  { label: "Brands", id: "brands" },
+                  { label: "Solutions", id: "solutions" },
+                  { label: "Gallery", id: "gallery" },
+                ].map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollToSection(link.id)}
+                    className="block text-sm text-neutral-400 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            {/* Contact */}
+            <div className="space-y-6">
+              <h4 className="text-sm font-semibold uppercase tracking-wider">
+                Contact
+              </h4>
+              <div className="space-y-4 text-sm text-neutral-400">
+                <p className="leading-relaxed">
+                  NH 44, Opposite Mayfair Convention Center,
+                  <br />
+                  Shamshabad, Hyderabad
+                  <br />
+                  Telangana 501218
+                </p>
+                <a
+                  href="tel:+917660022799"
+                  className="block hover:text-white transition-colors"
+                >
+                  +91 76600 22799
+                </a>
+                <a
+                  href="mailto:info@abcspacery.com"
+                  className="block hover:text-white transition-colors"
+                >
+                  info@abcspacery.com
+                </a>
+              </div>
+            </div>
           </div>
 
-          <div className="pt-8 border-t" style={{ borderColor: "#34495E" }}>
-            <p className="mb-6 text-lg" style={{ color: "#A0AEC0" }}>
-              With best compliments from:
+          {/* Partners */}
+          <div className="py-12 border-b border-neutral-800">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-start gap-6 md:gap-10 text-center md:text-left">
+              <div className="w-full md:w-auto">
+                <p className="text-lg md:text-xl font-semibold">
+                  Patel Marketing
+                </p>
+                <p className="text-sm text-neutral-500 mt-1">Hyderabad</p>
+              </div>
+
+              <div
+                className="hidden md:block h-10 w-px bg-neutral-800/70"
+                aria-hidden="true"
+              />
+
+              <div className="w-full md:w-auto">
+                <p className="text-lg md:text-xl font-semibold">
+                  ABC Group International
+                </p>
+                <p className="text-xs text-neutral-500 mt-2 leading-relaxed md:max-w-md">
+                  India • Qatar • UAE • Oman • Uganda • Rwanda • Kenya • Congo •
+                  Tanzania
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
+            <p>
+              © {new Date().getFullYear()} ABC Spacery. All rights reserved.
             </p>
-            <div className="space-y-3">
-              <p className="text-xl md:text-2xl font-semibold text-white">
-                Patel Marketing, Hyderabad
-              </p>
-              <p className="text-lg" style={{ color: "#A0AEC0" }}>
-                &
-              </p>
-              <p className="text-xl md:text-2xl font-semibold text-white">
-                ABC Group International
-              </p>
-              <p
-                className="text-sm md:text-base mt-6"
-                style={{ color: "#A0AEC0" }}
-              >
-                India | Qatar | UAE | Oman | Uganda | Rwanda | Kenya | Congo |
-                Tanzania
-              </p>
+            <div className="flex items-center gap-6">
+              <a href="#" className="hover:text-white transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Terms of Service
+              </a>
             </div>
           </div>
         </div>

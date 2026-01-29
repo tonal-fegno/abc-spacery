@@ -11,6 +11,11 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "ABC Spacery - Design Spaces, Inspire Living",
   description: "Hyderabad's newest destination for thoughtfully curated complete home solutions. 75,000 sq.ft. of pure inspiration.",
+  icons: {
+    icon: "/logo/abc-spacery-logo.svg",
+    shortcut: "/logo/abc-spacery-logo.svg",
+    apple: "/logo/abc-spacery-logo.svg",
+  },
 };
 
 export default function RootLayout({
