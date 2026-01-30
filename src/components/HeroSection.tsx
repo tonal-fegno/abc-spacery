@@ -16,14 +16,15 @@ export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spa
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
       {/* Video Background with Modern Overlay */}
-      <div className="absolute inset-0 z-0 brightness-[0.8] overflow-hidden">
+      <div className="absolute inset-0 z-0 brightness-[0.8] overflow-hidden poster">
         {!videoError ? (
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
+            poster="/abc-spacery-image.jpg"
+            className="w-full h-full object-cover" 
             onError={(e) => {
               e.currentTarget.style.display = "none";
               setVideoError(true);
@@ -32,13 +33,14 @@ export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spa
             <source src="/hero-video.webm" type="video/webm" />
           </video>
         ) : null}
-        {videoError && (
+        {/* {videoError && (
           <img
             src={fallbackImage}
             alt="ABC Spacery"
             className="w-full h-full object-cover"
           />
-        )}
+        )
+        } */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/40 to-neutral-900/60" />
       </div>
 
