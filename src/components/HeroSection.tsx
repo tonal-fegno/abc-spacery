@@ -17,7 +17,7 @@ export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spa
     >
       {/* Video Background with Modern Overlay */}
       <div className="absolute inset-0 z-0 brightness-[0.8] overflow-hidden poster">
-        {!videoError ? (
+        {/* {!videoError ? ( */}
           <video
             autoPlay
             loop
@@ -32,7 +32,7 @@ export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spa
           >
             <source src="/hero-video.webm" type="video/webm" />
           </video>
-        ) : null}
+        {/* ) : null} */}
         {/* {videoError && (
           <img
             src={fallbackImage}
