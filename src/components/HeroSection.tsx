@@ -26,7 +26,7 @@ export default function HeroSection({
           loop
           muted
           playsInline
-          poster="/abc-spacery-image.jpg"
+          poster={fallbackImage}
           className="w-full h-full object-cover"
           onError={(e) => {
             e.currentTarget.style.display = "none";
