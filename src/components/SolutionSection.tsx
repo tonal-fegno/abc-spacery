@@ -20,9 +20,7 @@ export default function SolutionsSection() {
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-neutral-900">
             <span className="block">Complete Home</span>
-            <span className="block font-semibold mt-3 md:mt-5">
-              Solutions
-            </span>
+            <span className="block font-semibold mt-3 md:mt-5">Solutions</span>
           </h2>
         </div>
 
@@ -31,7 +29,7 @@ export default function SolutionsSection() {
             <div
               key={index}
               className="group bg-neutral-50 hover:bg-neutral-900 rounded-3xl 
-             p-10 text-center transition-all duration-300 cursor-pointer
+             p-10 text-center transition-all duration-300 
              border border-neutral-100 hover:border-neutral-900
              shadow-md hover:shadow-xl flex items-center justify-center"
             >

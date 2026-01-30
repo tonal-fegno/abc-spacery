@@ -13,14 +13,14 @@ export default function GallerySection() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4">
         {/* Column 1 */}
         <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+          <div className="rounded-lg overflow-hidden group  flex-1">
             <img
               src="/gallerry/gallery-2.png"
               alt="Gallery 1"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+          <div className="rounded-lg overflow-hidden group  flex-1">
             <img
               src="/gallerry/gallery-6.png"
               alt="Gallery 5"
@@ -31,14 +31,14 @@ export default function GallerySection() {
 
         {/* Column 2 */}
         <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-[1.5]">
+          <div className="rounded-lg overflow-hidden group  flex-[1.5]">
             <img
               src="/gallerry/gallery-3.png"
               alt="Gallery 2"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+          <div className="rounded-lg overflow-hidden group  flex-1">
             <img
               src="/gallerry/gallerry-7.png"
               alt="Gallery 6"
@@ -49,14 +49,14 @@ export default function GallerySection() {
 
         {/* Column 3 */}
         <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+          <div className="rounded-lg overflow-hidden group  flex-1">
             <img
               src="/gallerry/gallery-4.png"
               alt="Gallery 3"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-[1.3]">
+          <div className="rounded-lg overflow-hidden group  flex-[1.3]">
             <img
               src="/gallerry/gallery-8.png"
               alt="Gallery 7"
@@ -67,21 +67,21 @@ export default function GallerySection() {
 
         {/* Column 4 */}
         <div className="flex flex-col gap-4 h-[800px] sm:h-[1000px] lg:h-[1200px]">
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+          <div className="rounded-lg overflow-hidden group  flex-1">
             <img
               src="/gallerry/gallery-5.png"
               alt="Gallery 4"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-1">
+          <div className="rounded-lg overflow-hidden group  flex-1">
             <img
               src="/gallerry/gallery-9.png"
               alt="Gallery 8"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
-          <div className="rounded-lg overflow-hidden group cursor-pointer flex-[0.8]">
+          <div className="rounded-lg overflow-hidden group  flex-[0.8]">
             <img
               src="/gallerry/gallery-1.png"
               alt="Gallery 9"

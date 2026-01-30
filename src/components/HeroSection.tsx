@@ -7,7 +7,10 @@ interface HeroSectionProps {
   fallbackImage?: string;
 }
 
-export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spacery-image.jpg" }: HeroSectionProps) {
+export default function HeroSection({
+  scrollToSection,
+  fallbackImage = "/abc-spacery-image.webp",
+}: HeroSectionProps) {
   const [videoError, setVideoError] = useState(false);
 
   return (
@@ -18,20 +21,20 @@ export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spa
       {/* Video Background with Modern Overlay */}
       <div className="absolute inset-0 z-0 brightness-[0.8] overflow-hidden poster">
         {/* {!videoError ? ( */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/abc-spacery-image.jpg"
-            className="w-full h-full object-cover" 
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-              setVideoError(true);
-            }}
-          >
-            <source src="/hero-video.webm" type="video/webm" />
-          </video>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/abc-spacery-image.jpg"
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+            setVideoError(true);
+          }}
+        >
+          <source src="/hero-video.webm" type="video/webm" />
+        </video>
         {/* ) : null} */}
         {/* {videoError && (
           <img
@@ -60,13 +63,13 @@ export default function HeroSection({ scrollToSection, fallbackImage = "/abc-spa
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => scrollToSection("brands")}
-              className="px-8 py-4 bg-white text-neutral-900 rounded-full font-medium hover:bg-neutral-100 transition-all duration-300 shadow-xl hover:shadow-2xl"
+              className="px-8 py-4 bg-white text-neutral-900 rounded-full font-medium hover:bg-neutral-100 transition-all duration-300 shadow-xl hover:shadow-2xl cursor-pointer"
             >
               Explore Brands
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-8 py-4 bg-transparent text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-neutral-900 transition-all duration-300"
+              className="px-8 py-4 bg-transparent text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-neutral-900 transition-all duration-300 cursor-pointer"
             >
               Get in Touch
             </button>

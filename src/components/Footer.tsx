@@ -38,7 +38,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 href="https://www.facebook.com/abcspacery/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
+                className="cursor-pointer w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
               >
                 <svg
                   className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 transition-colors"
@@ -52,7 +52,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 href="https://www.instagram.com/abcspacery?igsh=MXVnd3U1eDk3enV5eQ=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
+                className="cursor-pointer w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
               >
                 <svg
                   className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 transition-colors"
@@ -66,7 +66,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 href="https://www.linkedin.com/company/abc-spacery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
+                className="cursor-pointer w-10 h-10 rounded-full bg-neutral-800 hover:bg-white flex items-center justify-center transition-all duration-300 group"
               >
                 <svg
                   className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 transition-colors"
@@ -89,7 +89,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="block text-sm text-neutral-400 hover:text-white transition-colors"
+                  className="cursor-pointer block text-sm text-neutral-400 hover:text-white transition-colors"
                 >
                   {link.label}
                 </button>
@@ -112,13 +112,13 @@ export default function Footer({ scrollToSection }: FooterProps) {
               </p>
               <a
                 href="tel:+917660022799"
-                className="block hover:text-white transition-colors"
+                className="cursor-pointer block hover:text-white transition-colors"
               >
                 +91 76600 22799
               </a>
               <a
                 href="mailto:info@abcspacery.com"
-                className="block hover:text-white transition-colors"
+                className="cursor-pointer block hover:text-white transition-colors"
               >
                 info@abcspacery.com
               </a>
@@ -157,10 +157,10 @@ export default function Footer({ scrollToSection }: FooterProps) {
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
           <p>© {new Date().getFullYear()} ABC Spacery. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="cursor-pointer hover:text-white transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="cursor-pointer hover:text-white transition-colors">
               Terms of Service
             </a>
           </div>

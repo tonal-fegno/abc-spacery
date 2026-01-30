@@ -28,7 +28,7 @@ export default function TransformationQuote() {
   }, []);
 
   return (
-    <section ref={quoteSectionRef} className="py-32 px-6 bg-neutral-900">
+    <section ref={quoteSectionRef} className="py-32 px-6 bg-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div

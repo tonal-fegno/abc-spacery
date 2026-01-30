@@ -42,7 +42,7 @@ export default function Header({ scrollToSection }: HeaderProps) {
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="px-4 py-2 text-sm font-medium text-neutral-600 rounded-full hover:text-neutral-900 hover:bg-white transition-all duration-200"
+                  className="cursor-pointer px-4 py-2 text-sm font-medium text-neutral-600 rounded-full hover:text-neutral-900 hover:bg-white transition-all duration-200"
                 >
                   {link.label}
                 </button>
@@ -50,7 +50,7 @@ export default function Header({ scrollToSection }: HeaderProps) {
             </div>
             <button
               onClick={() => scrollToSection("contact")}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-neutral-900/80 text-sm font-medium text-neutral-900 hover:bg-neutral-900 hover:text-white transition-all duration-200 shadow-sm"
+              className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-neutral-900/80 text-sm font-medium text-neutral-900 hover:bg-neutral-900 hover:text-white transition-all duration-200 shadow-sm"
             >
               <span>Contact</span>
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -59,7 +59,7 @@ export default function Header({ scrollToSection }: HeaderProps) {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden inline-flex items-center justify-center p-2.5 rounded-full border border-neutral-200 bg-white/80 shadow-sm text-neutral-900"
+            className="cursor-pointer lg:hidden inline-flex items-center justify-center p-2.5 rounded-full border border-neutral-200 bg-white/80 shadow-sm text-neutral-900"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation"
           >
@@ -100,7 +100,7 @@ export default function Header({ scrollToSection }: HeaderProps) {
                   scrollToSection(link.id);
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-50 rounded-full px-4 py-2 transition-colors"
+                className="cursor-pointer block w-full text-left text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-50 rounded-full px-4 py-2 transition-colors"
               >
                 {link.label}
               </button>
@@ -110,7 +110,7 @@ export default function Header({ scrollToSection }: HeaderProps) {
                 scrollToSection("contact");
                 setMobileMenuOpen(false);
               }}
-              className="mt-2 block w-full text-center text-sm font-semibold text-white bg-neutral-900 rounded-full px-4 py-2.5 hover:bg-neutral-800 transition-colors"
+              className="cursor-pointer mt-2 block w-full text-center text-sm font-semibold text-white bg-neutral-900 rounded-full px-4 py-2.5 hover:bg-neutral-800 transition-colors"
             >
               Contact
             </button>
